@@ -1,12 +1,13 @@
-import { initialCartItems, tiles } from '@/entities/tile/model/data'
-import { calculateTotals } from '@/shared/lib/calculateTotals'
+'use client'
+
+import { tiles } from '@/entities/tile/model/data'
+import { selectCartItems, selectCartTotals } from '@/features/cart/model/cartSelectors'
 import { formatCurrency } from '@/shared/lib/formatCurrency'
+import { useAppSelector } from '@/shared/model/hooks'
 
 export function OrderPage() {
-  const totals = calculateTotals({
-    items: initialCartItems,
-    tiles,
-  })
+  const cartItems = useAppSelector(selectCartItems)
+  const totals = useAppSelector(selectCartTotals)
 
   return (
     <main className="min-h-screen bg-stone-950 px-4 py-8 text-stone-50">
@@ -20,6 +21,18 @@ export function OrderPage() {
           {tiles.map((tile) => (
             <li key={tile.id}>
               {tile.name} — {formatCurrency(tile.price)}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Cart from Redux</h2>
+
+        <ul className="mt-4 space-y-2">
+          {cartItems.map((item) => (
+            <li key={item.tileId}>
+              {item.tileId} — quantity: {item.quantity}
             </li>
           ))}
         </ul>
