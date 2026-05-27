@@ -1,4 +1,5 @@
-import type { CartItem, Tile } from '@/entities/tile/model/types'
+import type { Tile } from '@/entities/tile/model/types'
+import type { CartItem } from '@/features/cart/model/types'
 
 type CalculateTotalsParams = {
   items: CartItem[]
@@ -22,10 +23,10 @@ export const calculateTotals = ({ items, tiles }: CalculateTotalsParams): OrderT
       return total
     }
 
-    return total + tile.price * item.quantity
+    return total + tile.pricePerSqFt * item.areaSqFt
   }, 0)
 
-  const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE
+  const shipping = subtotal === 0 || subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE
 
   return {
     subtotal,

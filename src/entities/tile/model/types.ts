@@ -3,12 +3,7 @@ export type TileId = 'ocean-wave' | 'forest-fern' | 'terracotta-dot' | 'yellow-s
 export type Tile = {
   id: TileId
   name: string
-  price: number
-  imageAlt: string
-  swatchClassName: string
-}
-
-export type CartItem = {
-  tileId: TileId
-  quantity: number
+  pricePerSqFt: number
+  collectionImageUrl: string
+  itemImageUrl: string
 }

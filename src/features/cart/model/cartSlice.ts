@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { initialCartItems } from '@/entities/tile/model/data'
-import type { CartItem, TileId } from '@/entities/tile/model/types'
+import type { TileId } from '@/entities/tile/model/types'
+import type { CartItem } from '@/features/cart/model/types'
+import { initialCartItems } from '@/features/cart/model/data'
 
 type CartState = {
   items: CartItem[]
@@ -14,20 +15,37 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    changeQuantity: (
-      state,
-      action: PayloadAction<{
-        tileId: TileId
-        quantity: number
-      }>,
-    ) => {
+    changeAreaSqFt: (state, action: PayloadAction<{ tileId: TileId; areaSqFt: number }>) => {
       const item = state.items.find(({ tileId }) => tileId === action.payload.tileId)
 
       if (!item) {
         return
       }
 
-      item.quantity = Math.max(1, action.payload.quantity)
+      item.areaSqFt = Math.max(1, action.payload.areaSqFt)
+    },
+    increaseAreaSqFt: (state, action: PayloadAction<TileId>) => {
+      const item = state.items.find(({ tileId }) => tileId === action.payload)
+
+      if (!item) {
+        return
+      }
+
+      item.areaSqFt += 1
+    },
+    decreaseAreaSqFt: (state, action: PayloadAction<TileId>) => {
+      const item = state.items.find(({ tileId }) => tileId === action.payload)
+
+      if (!item) {
+        return
+      }
+
+      if (item.areaSqFt <= 1) {
+        state.items = state.items.filter(({ tileId }) => tileId !== action.payload)
+        return
+      }
+
+      item.areaSqFt -= 1
     },
 
     removeCartItem: (state, action: PayloadAction<TileId>) => {
@@ -36,5 +54,6 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { changeQuantity, removeCartItem } = cartSlice.actions
+export const { changeAreaSqFt, increaseAreaSqFt, decreaseAreaSqFt, removeCartItem } =
+  cartSlice.actions
 export const cartReducer = cartSlice.reducer
