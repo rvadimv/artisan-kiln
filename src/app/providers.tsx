@@ -2,7 +2,7 @@
 
 import { Provider } from 'react-redux'
 import { store } from '@/shared/model/store'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 type ProvidersProps = {
   children: ReactNode

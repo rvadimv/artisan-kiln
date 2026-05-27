@@ -1,46 +1,21 @@
-'use client'
+import { ShoppingCart } from '@/widgets/shopping-cart/ui/ShoppingCart'
 
-import { tiles } from '@/entities/tile/model/data'
-import { selectCartItems, selectCartTotals } from '@/features/cart/model/cartSelectors'
-import { formatCurrency } from '@/shared/lib/formatCurrency'
-import { useAppSelector } from '@/shared/model/hooks'
-
-export function OrderPage() {
-  const cartItems = useAppSelector(selectCartItems)
-  const totals = useAppSelector(selectCartTotals)
-
+export const OrderPage = () => {
   return (
     <main className="min-h-screen bg-stone-950 px-4 py-8 text-stone-50">
-      <h1 className="text-3xl font-semibold">The Artisan Kiln</h1>
-      <p className="mt-3 text-stone-300">Interactive ceramic tile order form.</p>
+      <div className="mx-auto max-w-5xl">
+        <header>
+          <p className="text-sm uppercase tracking-[0.3em] text-stone-400">The Artisan Kiln</p>
+          <h1 className="mt-3 text-4xl font-semibold">Craft your perfect tile order</h1>
+          <p className="mt-4 max-w-2xl text-stone-300">
+            Configure square footage, review your cart, and prepare your custom ceramic tile order.
+          </p>
+        </header>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Initial tiles</h2>
-
-        <ul className="mt-4 space-y-2">
-          {tiles.map((tile) => (
-            <li key={tile.id}>
-              {tile.name} — {formatCurrency(tile.price)}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Cart from Redux</h2>
-
-        <ul className="mt-4 space-y-2">
-          {cartItems.map((item) => (
-            <li key={item.tileId}>
-              {item.tileId} — quantity: {item.quantity}
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-6 font-semibold">Subtotal: {formatCurrency(totals.subtotal)}</p>
-        <p>Shipping: {formatCurrency(totals.shipping)}</p>
-        <p>Grand total: {formatCurrency(totals.grandTotal)}</p>
-      </section>
+        <div className="mt-8">
+          <ShoppingCart />
+        </div>
+      </div>
     </main>
   )
 }

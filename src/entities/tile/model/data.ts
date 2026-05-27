@@ -1,39 +1,32 @@
-import type { CartItem, Tile } from './types'
+import type { Tile } from './types'
 
 export const tiles: Tile[] = [
   {
     id: 'ocean-wave',
     name: 'Ocean Wave',
-    price: 28,
-    imageAlt: 'Ocean Wave tile pattern',
-    swatchClassName: 'bg-blue-800',
+    pricePerSqFt: 28,
+    collectionImageUrl: '/tiles/ocean-wave-collection.svg',
+    itemImageUrl: '/tiles/ocean-wave-item.svg',
   },
   {
     id: 'forest-fern',
     name: 'Forest Fern',
-    price: 30,
-    imageAlt: 'Forest Fern tile pattern',
-    swatchClassName: 'bg-emerald-700',
+    pricePerSqFt: 30,
+    collectionImageUrl: '/tiles/forest-fern-collection.svg',
+    itemImageUrl: '/tiles/forest-fern-item.svg',
   },
   {
     id: 'terracotta-dot',
     name: 'Terracotta Dot',
-    price: 26,
-    imageAlt: 'Terracotta Dot tile pattern',
-    swatchClassName: 'bg-orange-700',
+    pricePerSqFt: 26,
+    collectionImageUrl: '/tiles/terracotta-dot-collection.svg',
+    itemImageUrl: '/tiles/terracotta-dot-item.svg',
   },
   {
     id: 'yellow-star',
     name: 'Yellow Star',
-    price: 29,
-    imageAlt: 'Yellow Star tile pattern',
-    swatchClassName: 'bg-yellow-500',
+    pricePerSqFt: 29,
+    collectionImageUrl: '/tiles/yellow-star-collection.svg',
+    itemImageUrl: '/tiles/yellow-star-item.svg',
   },
-]
-
-export const initialCartItems: CartItem[] = [
-  { tileId: 'ocean-wave', quantity: 150 },
-  { tileId: 'forest-fern', quantity: 75 },
-  { tileId: 'terracotta-dot', quantity: 200 },
-  { tileId: 'yellow-star', quantity: 50 },
 ]
