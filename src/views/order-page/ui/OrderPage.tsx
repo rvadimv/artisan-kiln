@@ -1,4 +1,5 @@
 import { ShoppingCart } from '@/widgets/shopping-cart/ui/ShoppingCart'
+import { CheckoutForm } from '@/features/checkout/ui/CheckoutForm'
 
 export const OrderPage = () => {
   return (
@@ -14,6 +15,9 @@ export const OrderPage = () => {
 
         <div className="mt-8">
           <ShoppingCart />
+        </div>
+        <div className="mt-8">
+          <CheckoutForm />
         </div>
       </div>
     </main>
