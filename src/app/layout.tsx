@@ -1,16 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import type { ReactNode } from 'react'
+import { Fira_Sans_Condensed } from 'next/font/google'
 import './globals.css'
-import { Providers } from '@/app/providers'
+import { Providers } from './providers'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const firaSansCondensed = Fira_Sans_Condensed({
+  variable: '--font-main',
   subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -18,16 +15,18 @@ export const metadata: Metadata = {
   description: 'Interactive ceramic tile order form',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+type RootLayoutProps = Readonly<{
+  children: ReactNode
+}>
+
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
+    <html lang="en">
+      <body className={firaSansCondensed.variable}>
         <Providers>{children}</Providers>
       </body>
     </html>
   )
 }
+
+export default RootLayout

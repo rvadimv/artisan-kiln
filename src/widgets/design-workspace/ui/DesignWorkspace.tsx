@@ -1,16 +1,16 @@
 import { DesignGrid } from '@/features/design-tool/ui/DesignGrid'
 import { DesignPalette } from '@/features/design-tool/ui/DesignPalette'
 
-export function DesignWorkspace() {
+export const DesignWorkspace = () => {
   return (
-    <section className="hidden w-full text-[#111111] lg:block">
-      <h2 className="mb-2 text-xl font-black uppercase tracking-tight md:text-2xl">
-        Interactive Design Tool
-      </h2>
+    <section className="hidden w-full text-kiln-ink xl:block">
+      <h2 className="mb-2 text-xl font-bold uppercase tracking-tight">Interactive Design Tool</h2>
 
-      <div className="space-y-5 border-2 border-[#111111] bg-[#f6eedc] p-4 shadow-[4px_4px_0_#111111]">
-        <DesignGrid />
-        <DesignPalette />
+      <div className="border-2 border-kiln-ink bg-kiln-paper p-4 shadow-kiln">
+        <div className="grid grid-cols-[1fr_104px] gap-3">
+          <DesignGrid />
+          <DesignPalette />
+        </div>
       </div>
     </section>
   )

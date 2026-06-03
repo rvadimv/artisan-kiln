@@ -4,6 +4,6 @@ export type Tile = {
   id: TileId
   name: string
   pricePerSqFt: number
-  collectionImageUrl: string
-  itemImageUrl: string
+  previewImageUrl: string
+  patternImageUrl: string
 }
