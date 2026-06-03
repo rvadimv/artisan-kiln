@@ -1,17 +1,22 @@
-import type { Tile } from '@/entities/tile/model/types'
+import Image from 'next/image'
 
 type TilePreviewProps = {
-  tile: Tile
+  imageUrl?: string
   className?: string
 }
 
-export const TilePreview = ({ tile, className }: TilePreviewProps) => {
+export const TilePreview = ({ imageUrl, className }: TilePreviewProps) => {
   return (
-    <div
-      aria-label={`${tile.name} tile pattern`}
-      className={className}
-      style={{ backgroundColor: '#ccc' }}
-    />
-    /*<img src={tile.imageUrl} alt={`${tile.name} tile pattern`} />*/
+    <div className={`overflow-hidden bg-[#ccc] ${className ?? ''}`}>
+      {imageUrl ? (
+        <Image
+          src={imageUrl}
+          alt=""
+          width={96}
+          height={96}
+          className="block h-full w-full object-cover"
+        />
+      ) : null}
+    </div>
   )
 }

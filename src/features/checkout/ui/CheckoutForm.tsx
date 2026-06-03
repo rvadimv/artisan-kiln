@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch, type FieldError, type UseFormRegister } from 'react-hook-form'
 import { checkoutSchema, type CheckoutFormValues } from '@/features/checkout/model/checkoutSchema'
 import { PaymentMethodSelector } from '@/features/checkout/ui/PaymentMethodSelector'
-import type { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
 
 type TextFieldProps = {
   label: string
@@ -14,6 +14,10 @@ type TextFieldProps = {
   type?: string
   placeholder?: string
   inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode']
+}
+
+type CheckoutFormProps = {
+  cartSlot?: ReactNode
 }
 
 const TextField = ({
@@ -43,7 +47,7 @@ const TextField = ({
   )
 }
 
-export const CheckoutForm = () => {
+export const CheckoutForm = ({ cartSlot }: CheckoutFormProps) => {
   const {
     register,
     handleSubmit,
@@ -126,6 +130,8 @@ export const CheckoutForm = () => {
             />
           </div>
         </div>
+
+        {cartSlot && <div className="mt-6">{cartSlot}</div>}
 
         <PaymentMethodSelector register={register} selectedMethod={selectedPaymentMethod} />
 
