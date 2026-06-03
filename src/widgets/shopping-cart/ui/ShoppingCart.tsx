@@ -12,7 +12,7 @@ type ShoppingCartProps = {
   showTitle?: boolean
 }
 
-const cartColumns = 'grid-cols-[104px_76px_67px_67px_65px]'
+const cartColumns = 'grid-cols-[104px_76px_67px_67px_64px]'
 
 const headerCellClass =
   'flex h-11 items-center justify-center border-r-2 border-kiln-ink bg-kiln-paperDark px-1.5 text-center text-[11px] font-bold uppercase leading-tight'
@@ -41,7 +41,7 @@ export const ShoppingCart = ({ showTitle = true }: ShoppingCartProps) => {
   return (
     <section className="mx-auto w-[382px] max-w-full text-kiln-ink xl:mx-0">
       {showTitle && (
-        <h2 className="mb-2 text-xl font-bold uppercase tracking-tight">
+        <h2 className="mb-2 text-xl font-medium uppercase tracking-tight">
           Shopping Cart & Design Tool
         </h2>
       )}
@@ -137,7 +137,7 @@ export const ShoppingCart = ({ showTitle = true }: ShoppingCartProps) => {
                           className="object-contain"
                         />
                       </span>
-                      <span className={'inline-flex pl-[3px]'}>Add</span>
+                      <span className={'inline-flex pl-[2.5px]'}>Add</span>
                     </button>
 
                     <button

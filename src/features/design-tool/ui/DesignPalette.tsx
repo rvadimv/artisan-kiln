@@ -11,10 +11,12 @@ export const DesignPalette = () => {
   const selectedTileId = useAppSelector(selectSelectedTileId)
 
   return (
-    <section className="text-kiln-ink">
-      <h3 className="mb-2 text-lg font-bold uppercase leading-none">Design Palette</h3>
+    <section className="border-l-2 border-kiln-ink bg-kiln-paperDark text-kiln-ink">
+      <h3 className="border-b-2 border-kiln-ink px-1 py-2 text-center text-[15px] font-medium uppercase leading-none">
+        Design Palette
+      </h3>
 
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-2 gap-[8px] p-[8px]">
         {tiles.map((tile) => {
           const isSelected = selectedTileId === tile.id
 
@@ -23,19 +25,16 @@ export const DesignPalette = () => {
               key={tile.id}
               type="button"
               onClick={() => dispatch(selectTile(tile.id))}
-              className={`border-2 border-kiln-ink bg-kiln-paper p-2 shadow-kiln-sm ${
-                isSelected ? 'ring-4 ring-kiln-mint' : ''
-              }`}
+              className="group grid h-[51px] w-[49px] place-items-center"
               aria-pressed={isSelected}
+              aria-label={`Select ${tile.name}`}
             >
               <TilePreview
                 imageUrl={tile.previewImageUrl}
-                className="mx-auto size-14 rounded-md border-2 border-kiln-ink shadow-none"
+                className={`h-[51px] w-[49px] rounded-[3px] border-2 shadow-none transition-colors ${
+                  isSelected ? 'border-kiln-clay' : 'border-kiln-ink group-hover:border-kiln-clay'
+                }`}
               />
-
-              <span className="mt-1 block text-center text-[10px] font-bold uppercase leading-tight">
-                {tile.name}
-              </span>
             </button>
           )
         })}
