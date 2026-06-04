@@ -1,36 +1,164 @@
-AThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Artisan Kiln
+
+Interactive ceramic tile order form built with Next.js, React, TypeScript, Redux Toolkit, React Hook Form, Zod and Tailwind CSS.
+
+The project recreates a stylized order-form mockup for a fictional ceramic tile shop. It combines a shopping cart, a tile design workspace and a checkout form in a responsive interface.
+
+## Features
+
+- Responsive layout for desktop and mobile screens
+- Shopping cart with editable square-foot quantities
+- Add/remove quantity actions for cart items
+- Automatic subtotal, shipping and grand total calculation
+- Static tile catalog with preview and pattern images
+- Interactive design palette with selected tile state
+- 6 × 6 design grid for placing selected tile patterns
+- Right-click cell clearing in the design grid
+- Checkout form with customer, shipping and project fields
+- Payment method selection:
+  - Credit/Debit Card
+  - PayPal
+  - Apple Pay
+  - Bank Transfer
+- Conditional credit card fields
+- Form validation with React Hook Form and Zod
+- Decorative header, navigation, footer and page artwork based on the provided mockups
+
+## Tech Stack
+
+- **Next.js 16** with App Router
+- **React 19**
+- **TypeScript**
+- **Redux Toolkit**
+- **React Redux**
+- **React Hook Form**
+- **Zod**
+- **Tailwind CSS**
+- **ESLint**
+- **Prettier**
+
+## Architecture
+
+The project follows a lightweight feature-oriented structure:
+
+```txt
+src/
+├── app/                  # Next.js app entry, layout and providers
+├── entities/             # Domain entities, tile data and tile UI
+├── features/             # Cart, checkout and design-tool logic
+├── shared/               # Shared store hooks and utility functions
+├── views/                # Page-level composition
+└── widgets/              # Larger UI blocks: cart, design workspace, nav, footer, decor
+```
+
+Main state slices:
+
+- `cart` — cart items and square-foot quantity updates
+- `designTool` — selected tile and design-grid cell state
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+
+- Node.js 22 or later is recommended
+- pnpm
+
+### Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run the development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open the app in the browser:
 
-## Learn More
+```txt
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Production build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm build
+pnpm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Starts the local development server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm build
+```
+
+Creates a production build.
+
+```bash
+pnpm start
+```
+
+Runs the production build locally.
+
+```bash
+pnpm lint
+```
+
+Runs ESLint checks.
+
+```bash
+pnpm lint:fix
+```
+
+Runs ESLint and applies automatic fixes where possible.
+
+```bash
+pnpm format
+```
+
+Formats the project with Prettier.
+
+```bash
+pnpm format:check
+```
+
+Checks formatting without changing files.
+
+## Implementation Notes
+
+- Tile data is stored locally in the project.
+- Cart totals are derived from Redux state using selectors and shared calculation utilities.
+- The checkout form is front-end only; successful submission logs validated form data in the browser console.
+- Credit card fields are validated only when `Credit/Debit Card` is selected.
+- Decorative assets are rendered as non-interactive visual layers and do not block UI interactions.
+- The layout prioritizes stable responsive behavior over exact pixel-perfect matching on every viewport width.
+
+## Validation Rules
+
+The checkout form validates:
+
+- customer name
+- phone number
+- email
+- shipping address
+- credit card number when card payment is selected
+- expiration date in `MM/YY` format when card payment is selected
+- CVC when card payment is selected
+
+## Responsive Behavior
+
+- Desktop view shows the shopping cart, design workspace and checkout form in a three-column layout.
+- Mobile view focuses on a single-column checkout flow and embeds the cart inside the form flow.
+- Navigation and decorative elements are adjusted or simplified on smaller screens to avoid horizontal overflow.
+
+## Status
+
+The project is implemented as a front-end test task and is ready for review.
