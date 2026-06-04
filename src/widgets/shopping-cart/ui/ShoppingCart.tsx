@@ -39,14 +39,14 @@ export const ShoppingCart = ({ showTitle = true }: ShoppingCartProps) => {
   const totals = useAppSelector(selectCartTotals)
 
   return (
-    <section className="mx-auto w-[382px] max-w-full text-kiln-ink xl:mx-0">
+    <section className="mx-auto max-w-full overflow-x-auto text-kiln-ink xl:mx-0 xl:w-[382px] xl:overflow-visible">
       {showTitle && (
         <h2 className="mb-2 text-xl font-medium uppercase tracking-tight">
           Shopping Cart & Design Tool
         </h2>
       )}
 
-      <div className="overflow-hidden rounded-[3px] rounded-br-none bg-kiln-paper">
+      <div className="w-[382px] overflow-hidden rounded-[3px] rounded-br-none bg-kiln-paper">
         <div className={`grid ${cartColumns} border-2 border-kiln-ink`}>
           <div className={headerCellClass}>Tile Collection</div>
 
