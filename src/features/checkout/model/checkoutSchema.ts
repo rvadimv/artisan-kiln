@@ -1,58 +1,62 @@
 import { z } from 'zod'
 
-const baseCheckoutSchema = z.object({
-  customerName: z.string().min(2, 'Enter customer name'),
-  phone: z.string().min(5, 'Enter phone number'),
-  email: z.string().email('Enter a valid email'),
-  shippingAddress: z.string().min(5, 'Enter shipping address'),
-  projectNotes: z.string().optional(),
-})
+const paymentMethodSchema = z.enum(['credit-card', 'paypal', 'apple-pay', 'bank-transfer'])
 
-const creditCardCheckoutSchema = baseCheckoutSchema.extend({
-  paymentMethod: z.literal('credit-card'),
+const isValidCardNumber = (value: string) => {
+  const digits = value.replace(/\s/g, '')
 
-  cardNumber: z
-    .string()
-    .min(1, 'Enter card number')
-    .regex(/^\d{16}$/, 'Card number must contain 16 digits'),
+  return /^\d{13,19}$/.test(digits)
+}
 
-  cardExpiry: z
-    .string()
-    .min(1, 'Enter expiration date')
-    .regex(/^\d{2}\/\d{2}$/, 'Use MM/YY format'),
+export const checkoutSchema = z
+  .object({
+    customerName: z.string().trim().min(1, 'Enter customer name'),
 
-  cardCvc: z
-    .string()
-    .min(1, 'Enter CVC')
-    .regex(/^\d{3,4}$/, 'CVC must contain 3 or 4 digits'),
-})
+    phone: z
+      .string()
+      .trim()
+      .regex(/^\+?[0-9\s()-]{7,20}$/, 'Enter a valid phone'),
 
-const paypalCheckoutSchema = baseCheckoutSchema.extend({
-  paymentMethod: z.literal('paypal'),
-  cardNumber: z.string().optional(),
-  cardExpiry: z.string().optional(),
-  cardCvc: z.string().optional(),
-})
+    email: z.string().trim().email('Enter a valid email'),
 
-const applePayCheckoutSchema = baseCheckoutSchema.extend({
-  paymentMethod: z.literal('apple-pay'),
-  cardNumber: z.string().optional(),
-  cardExpiry: z.string().optional(),
-  cardCvc: z.string().optional(),
-})
+    shippingAddress: z.string().trim().min(1, 'Enter shipping address'),
 
-const bankTransferCheckoutSchema = baseCheckoutSchema.extend({
-  paymentMethod: z.literal('bank-transfer'),
-  cardNumber: z.string().optional(),
-  cardExpiry: z.string().optional(),
-  cardCvc: z.string().optional(),
-})
+    projectNotes: z.string().trim().optional(),
 
-export const checkoutSchema = z.discriminatedUnion('paymentMethod', [
-  creditCardCheckoutSchema,
-  paypalCheckoutSchema,
-  applePayCheckoutSchema,
-  bankTransferCheckoutSchema,
-])
+    paymentMethod: paymentMethodSchema,
+
+    cardNumber: z.string().trim().optional(),
+    cardExpiry: z.string().trim().optional(),
+    cardCvc: z.string().trim().optional(),
+  })
+  .superRefine((values, context) => {
+    if (values.paymentMethod !== 'credit-card') {
+      return
+    }
+
+    if (!values.cardNumber || !isValidCardNumber(values.cardNumber)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['cardNumber'],
+        message: 'Enter a valid card number',
+      })
+    }
+
+    if (!values.cardExpiry || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(values.cardExpiry)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['cardExpiry'],
+        message: 'Use MM/YY',
+      })
+    }
+
+    if (!values.cardCvc || !/^\d{3,4}$/.test(values.cardCvc)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['cardCvc'],
+        message: 'Enter CVC',
+      })
+    }
+  })
 
 export type CheckoutFormValues = z.infer<typeof checkoutSchema>

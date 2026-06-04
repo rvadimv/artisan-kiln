@@ -14,10 +14,12 @@ const paymentMethodLabel: Record<PaymentMethod, string> = {
   'bank-transfer': 'Bank Transfer',
 }
 
-export function PaymentMethodSelector({ register, selectedMethod }: PaymentMethodSelectorProps) {
+export const PaymentMethodSelector = ({ register, selectedMethod }: PaymentMethodSelectorProps) => {
   return (
-    <fieldset className="border-2 border-[#111111] bg-[#f6eedc]">
-      <legend className="ml-3 px-2 text-sm font-black uppercase">Select Payment Method:</legend>
+    <fieldset className="border-2 border-kiln-ink bg-kiln-paper">
+      <legend className="ml-3 px-2 text-sm font-black uppercase leading-none">
+        Select Payment Method:
+      </legend>
 
       <div className="grid grid-cols-2">
         {paymentMethods.map((method) => {
@@ -26,14 +28,20 @@ export function PaymentMethodSelector({ register, selectedMethod }: PaymentMetho
           return (
             <label
               key={method}
-              className="flex cursor-pointer items-center gap-3 border-[#111111] p-3 text-sm font-black uppercase odd:border-r-2 [&:nth-child(-n+2)]:border-b-2"
+              className="flex h-[52px] cursor-pointer items-center gap-3 border-kiln-ink px-3 text-sm font-black uppercase leading-tight odd:border-r-2 [&:nth-child(-n+2)]:border-b-2"
             >
               <input
                 type="radio"
                 value={method}
-                className="size-5 accent-[#111111]"
+                className="peer sr-only"
                 {...register('paymentMethod')}
               />
+
+              <span className="grid size-5 shrink-0 place-items-center rounded-full border border-kiln-ink bg-kiln-paper">
+                <span
+                  className={`size-3 rounded-full ${isSelected ? 'bg-kiln-ink' : 'bg-transparent'}`}
+                />
+              </span>
 
               <span className={isSelected ? 'underline underline-offset-4' : undefined}>
                 {paymentMethodLabel[method]}
