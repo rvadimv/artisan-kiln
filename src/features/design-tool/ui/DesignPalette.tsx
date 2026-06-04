@@ -32,7 +32,7 @@ export const DesignPalette = () => {
               <TilePreview
                 imageUrl={tile.previewImageUrl}
                 className={`h-[51px] w-[49px] rounded-[3px] border-2 shadow-none transition-colors ${
-                  isSelected ? 'border-kiln-clay' : 'border-kiln-ink group-hover:border-kiln-clay'
+                  isSelected ? 'border-[#9aa0ad]' : 'border-kiln-ink group-hover:border-[#9aa0ad]'
                 }`}
               />
             </button>
