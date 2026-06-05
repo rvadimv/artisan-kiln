@@ -4,6 +4,14 @@ Interactive ceramic tile order form built with Next.js, React, TypeScript, Redux
 
 The project recreates a stylized order-form mockup for a fictional ceramic tile shop. It combines a shopping cart, a tile design workspace and a checkout form in a responsive interface.
 
+## Demo
+
+Live demo:
+
+```txt
+https://artisan-kiln-rho.vercel.app/
+```
+
 ## Features
 
 - Responsive layout for desktop and mobile screens
@@ -20,6 +28,7 @@ The project recreates a stylized order-form mockup for a fictional ceramic tile 
   - PayPal
   - Apple Pay
   - Bank Transfer
+
 - Conditional credit card fields
 - Form validation with React Hook Form and Zod
 - Decorative header, navigation, footer and page artwork based on the provided mockups
@@ -55,6 +64,12 @@ Main state slices:
 
 - `cart` — cart items and square-foot quantity updates
 - `designTool` — selected tile and design-grid cell state
+
+## Design Source
+
+The layout was implemented from provided PNG mockup images rather than from a Figma file or a complete design system.
+
+Because of that, spacing, decorative assets and responsive behavior were recreated manually based on visual references. The implementation focuses on matching the supplied artwork as closely as possible while keeping the interface stable and usable across common screen sizes.
 
 ## Getting Started
 
@@ -140,6 +155,7 @@ Checks formatting without changing files.
 - Credit card fields are validated only when `Credit/Debit Card` is selected.
 - Decorative assets are rendered as non-interactive visual layers and do not block UI interactions.
 - The layout prioritizes stable responsive behavior over exact pixel-perfect matching on every viewport width.
+- Mobile layout uses a simplified one-column flow to avoid horizontal overflow and keep the checkout process usable.
 
 ## Validation Rules
 
@@ -158,7 +174,8 @@ The checkout form validates:
 - Desktop view shows the shopping cart, design workspace and checkout form in a three-column layout.
 - Mobile view focuses on a single-column checkout flow and embeds the cart inside the form flow.
 - Navigation and decorative elements are adjusted or simplified on smaller screens to avoid horizontal overflow.
+- Large decorative elements are treated as visual enhancement and may be reduced or hidden on smaller screens.
 
 ## Status
 
-The project is implemented as a front-end test task and is ready for review.
+The project is implemented as a front-end test task.
