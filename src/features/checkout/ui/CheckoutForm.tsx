@@ -166,21 +166,21 @@ const MobilePaymentCard = ({ label, value, selectedMethod, register }: PaymentOp
 
   return (
     <label
-      className={`relative flex h-[82px] cursor-pointer flex-col items-center justify-end border-r-2 border-kiln-ink px-1 pb-2 last:border-r-0 ${
+      className={`flex h-[82px] min-w-0 cursor-pointer flex-col items-center justify-center border-r-2 border-kiln-ink px-1 py-2 last:border-r-0 ${
         isSelected ? 'bg-kiln-paperDark' : 'bg-kiln-paper'
       }`}
     >
       <input type="radio" value={value} className="sr-only" {...register('paymentMethod')} />
 
-      <span
-        className={`absolute left-2 top-3 block size-[14px] rounded-full border-2 border-kiln-ink ${
-          isSelected ? 'bg-[#707D8D]' : 'bg-kiln-paper'
-        }`}
-      />
+      <span className="flex h-[36px] w-full items-center justify-center gap-1">
+        <span
+          className={`block size-[14px] shrink-0 rounded-full border-2 border-kiln-ink ${
+            isSelected ? 'bg-[#707D8D]' : 'bg-kiln-paper'
+          }`}
+        />
 
-      <span className="mb-1 flex h-[34px] items-center justify-center">
         {value === 'credit-card' && (
-          <span className="relative block h-[28px] w-[49px]">
+          <span className="relative block h-[28px] w-[49px] shrink-0">
             <Image
               src="/images/payment/card-icon.png"
               alt=""
@@ -192,43 +192,43 @@ const MobilePaymentCard = ({ label, value, selectedMethod, register }: PaymentOp
         )}
 
         {value === 'paypal' && (
-          <span className="relative block h-[24px] w-[21px]">
+          <span className="relative block h-[33px] w-[24px] shrink-0">
             <Image
               src="/images/payment/paypal-icon-m.png"
               alt=""
               fill
-              sizes="21px"
+              sizes="24px"
               className="object-contain"
             />
           </span>
         )}
 
         {value === 'apple-pay' && (
-          <span className="relative block h-[22px] w-[52px]">
+          <span className="relative block h-[26px] w-[56px] shrink-0">
             <Image
               src="/images/payment/apple-pay-icon2.png"
               alt=""
               fill
-              sizes="52px"
+              sizes="56px"
               className="object-contain"
             />
           </span>
         )}
 
         {value === 'bank-transfer' && (
-          <span className="relative block h-[28px] w-[31px]">
+          <span className="relative block h-[36px] w-[39px] shrink-0">
             <Image
               src="/images/payment/bank-icon2.png"
               alt=""
               fill
-              sizes="31px"
+              sizes="39px"
               className="object-contain"
             />
           </span>
         )}
       </span>
 
-      <span className="min-h-[20px] text-center text-[10px] font-medium uppercase leading-[10px]">
+      <span className="mt-2 min-h-[20px] max-w-full text-center text-[12px] font-medium uppercase leading-[10px]">
         {label}
       </span>
     </label>
